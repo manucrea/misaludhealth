@@ -3,6 +3,10 @@ export async function handler(event) {
   if (!target) {
     return { statusCode: 400, body: "Missing ?url=" };
   }
+  const allowed = "https://misalud-21041669.hs-sites-na2.com/blog/rss.xml";
+  if (target !== allowed) {
+    return { statusCode: 403, body: "URL not allowed" };
+  }
 
   try {
     const res = await fetch(target, { headers: { "User-Agent": "Mozilla/5.0" } });
